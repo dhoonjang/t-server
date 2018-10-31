@@ -22,7 +22,16 @@ export const addPerson = async (gender, place) => {
 
   return await new Person({
     id: people.length,
-    gender: gender,
-    place: place
+    gender,
+    place
   }).save()
+}
+
+export const findPerson = async (gender, place) => {
+  if (gender == 'male'){
+    return await Person.findOne({ $and:[{"gender" : "female" }, {"place" : place}] });
+  }
+  else if (gender == 'female'){
+    return await Person.findOne({ $and:[{"gender" : "male" }, {"place" : place}] });
+  }
 }

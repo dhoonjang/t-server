@@ -1,5 +1,6 @@
 type Query {
   tests: [test]!
+  findPerson(gender: String!, place: String!): person
 }
 
 type test {

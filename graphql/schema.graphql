@@ -1,0 +1,18 @@
+type Query {
+  tests: [test]!
+}
+
+type test {
+  id: Int!,
+  name: String!
+}
+
+type Mutation {
+  addPerson(gender: String!, place: String!): person!
+}
+
+type person {
+  id: Int!,
+  gender: String!,
+  place: String!
+}

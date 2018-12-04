@@ -1,19 +1,24 @@
 type Query {
-  tests: [test]!
-  findPerson(gender: String!, place: String!): person
-}
-
-type test {
-  id: Int!,
-  name: String!
+  findMate(gender: String!, place: String!): person
 }
 
 type Mutation {
   addPerson(gender: String!, place: String!): person!
-}
+  addCouple(male_id: Int!, female_id: Int!, place: String!): couple
+  changeMatch(male_id: Int!, female_id: Int!): [person]
+} 
 
 type person {
   id: Int!,
   gender: String!,
-  place: String!
+  place: String!,
+  match: Boolean!,
+}
+
+type couple {
+  id: Int!,
+  male_id: Int!,
+  female_id: Int!,
+  place: String!,
+  state: String!
 }

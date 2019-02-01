@@ -1,0 +1,23 @@
+type User {
+  id: Int!
+  email: String!
+  name: String!
+  password: String!
+  gender: String!
+  age: Int!
+  isVerified: Boolean!
+  isMatched: Boolean!
+  lastLng: Float
+  lastLat: Float
+  lastOrientation: Float
+  chat: Chat
+  messages: [Message]
+  coupleId: Int
+  couple: Couple
+  createdAt: String!
+  updatedAt: String
+}
+
+type Query {
+  getUser: User!
+}

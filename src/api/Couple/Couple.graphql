@@ -1,0 +1,11 @@
+type Couple {
+  id: Int!
+  status: String!
+  users: [User]
+  placeId: Int
+  place: Place
+  chatId: Int
+  chat: Chat
+  createdAt: String!
+  updatedAt: String
+}

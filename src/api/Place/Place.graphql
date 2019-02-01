@@ -1,0 +1,13 @@
+type Place {
+  id: Int!
+  name: String!
+  lat: Float!
+  lng: Float!
+  star: Int!
+  address: String!
+  explanation: String
+  isTaken: Boolean!
+  couples: [Couple]
+  createdAt: String!
+  updatedAt: String
+}

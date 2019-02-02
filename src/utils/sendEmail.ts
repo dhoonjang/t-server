@@ -1,8 +1,8 @@
 import Mailgun from "mailgun-js";
 
 const mailGunClient = new Mailgun({
-  apiKey: process.env.MAILGUN_API_KEY || "",
-  domain: process.env.MAILGUN_DOMAIN || ""
+    apiKey: process.env.MAILGUN_API_KEY || "",
+    domain: process.env.MAILGUN_DOMAIN || ""
 });
 
 const sendEmail = (/*to: string */subject: string, text: string) => {
@@ -16,8 +16,8 @@ const sendEmail = (/*to: string */subject: string, text: string) => {
     return mailGunClient.messages().send(emailData);
 }
 
-export const sendVerificationEmail = (fullName: string, key: string) => {
-    const emailSubject = `Hello! ${fullName}, please verify your email **/${key}/**`;
+export const sendVerificationEmail = (name: string, key: string) => {
+    const emailSubject = `Hello! ${name}, please verify your email **/${key}/**`;
     const emailBody = `Verify your email by clicking <a href="http://nuber.com/verification/${key}/">here</a>`;
     return sendEmail(emailSubject, emailBody);
-  };
+};

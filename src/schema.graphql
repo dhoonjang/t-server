@@ -44,13 +44,30 @@ type Place {
   updatedAt: String
 }
 
+type SignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  SignIn(email: String!, password: String!): SignInResponse!
+  SignUp(name: String!, email: String!, password: String!, gender: String!, age: Int): SignUpResponse!
+}
+
+type SignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
 type User {
   id: Int!
   email: String!
   name: String!
   password: String!
   gender: String!
-  age: Int!
+  age: Int
   isVerified: Boolean!
   isMatched: Boolean!
   lastLng: Float
@@ -66,4 +83,13 @@ type User {
 
 type Query {
   getUser: User!
+}
+
+type Verification {
+  id: Int!
+  payload: String!
+  key: String!
+  verified: Boolean!
+  createdAt: String!
+  updatedAt: String
 }

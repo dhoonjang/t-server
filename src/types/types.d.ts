@@ -1,5 +1,3 @@
-export type verificationTarget = "PHONE" | "EMAIL";
-
 export type coupleStatus = 
     | "REQUESTING"
     | "MATCHING"

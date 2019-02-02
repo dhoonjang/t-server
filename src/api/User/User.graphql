@@ -4,7 +4,7 @@ type User {
   name: String!
   password: String!
   gender: String!
-  age: Int!
+  age: Int
   isVerified: Boolean!
   isMatched: Boolean!
   lastLng: Float

@@ -44,21 +44,38 @@ type Place {
   updatedAt: String
 }
 
-type SignInResponse {
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetMyProfile: GetMyProfileResponse!
+  getUser: User!
+}
+
+type LogInResponse {
   ok: Boolean!
   error: String
   token: String
 }
 
 type Mutation {
-  SignIn(email: String!, password: String!): SignInResponse!
-  SignUp(name: String!, email: String!, password: String!, gender: String!, age: Int): SignUpResponse!
+  LogIn(email: String!, password: String!): LogInResponse!
+  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
+  UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
 }
 
 type SignUpResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type UpdateMyProfileResponse {
+  ok: Boolean!
+  error: String
 }
 
 type User {
@@ -79,10 +96,6 @@ type User {
   couple: Couple
   createdAt: String!
   updatedAt: String
-}
-
-type Query {
-  getUser: User!
 }
 
 type Verification {

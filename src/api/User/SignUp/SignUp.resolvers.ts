@@ -7,7 +7,6 @@ import { Resolvers } from "../../../types/resolvers";
 import createJWT from "../../../utils/createJWT";
 import Verification from "../../../entities/Verification";
 import { sendVerificationEmail } from "../../../utils/sendEmail";
-import cleanNullArgs from "../../../utils/cleanNullArgs";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -32,8 +31,7 @@ const resolvers: Resolvers = {
             token: null
           };
         } else {
-          const notNull = cleanNullArgs(args);
-          const newUser = await User.create({ ...notNull }).save();
+          const newUser = await User.create({ ...args }).save();
           if (newUser.email) {
             const emailVerification = await Verification.create({
               payload: newUser.email

@@ -1,16 +1,15 @@
-import { SignInMutationArgs, SignInResponse } from "src/types/graph";
+import { LogInMutationArgs, LogInResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
-    SignIn: async (
+    LogIn: async (
       _,
-      args: SignInMutationArgs
-    ): Promise<SignInResponse> => {
+      args: LogInMutationArgs
+    ): Promise<LogInResponse> => {
       const { email, password } = args;
-      console.log(email);
       try {
         const user = await User.findOne({ email });
         if (!user) {
@@ -20,7 +19,6 @@ const resolvers: Resolvers = {
             token: null
           }
         }
-        console.log(password);
         const checkPassword = await user.comparePassword(password)
         if (checkPassword) {
           const token = createJWT(user.id);

@@ -15,7 +15,6 @@ import {
 import Chat from './Chat';
 import Message from './Message';
 import Couple from './Couple';
-import { genderStatus } from 'src/types/types';
 
 const BCRYPT_ROUNDS = 10;
 
@@ -34,9 +33,9 @@ class User extends BaseEntity {
   password: string;
   
   @Column({ type: "text" })
-  gender: genderStatus;
+  gender: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", nullable: true })
   age: number;
 
   @Column({ type: "boolean", default: false })
@@ -62,7 +61,7 @@ class User extends BaseEntity {
 
   @Column({ nullable: true })
   coupleId: number;
-  
+
   @ManyToOne(type => Couple, couple => couple.users)
   couple: Couple;
 

@@ -10,6 +10,5 @@ type Mutation {
     email: String!
     password: String!
     gender: String!
-    age: Int
   ): SignUpResponse!
 }

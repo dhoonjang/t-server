@@ -4,7 +4,3 @@ export type coupleStatus =
     | "MEETING"
     | "FINISHED"
     | "CANCELED";
-
-export type genderStatus =
-    | "MALE"
-    | "FEMALE";

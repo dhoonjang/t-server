@@ -1,4 +1,4 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]\n  users: [User]\n  couple: Couple\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Couple {\n  id: Int!\n  status: String!\n  users: [User]\n  placeId: Int\n  place: Place\n  chatId: Int\n  chat: Chat\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chatId: Int!\n  chat: Chat!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  star: Int!\n  address: String!\n  explanation: String\n  isTaken: Boolean!\n  couples: [Couple]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  getUser: User!\n}\n\ntype LogInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  LogIn(email: String!, password: String!): LogInResponse!\n  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!\n  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String): UpdateMyProfileResponse!\n}\n\ntype SignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  name: String!\n  password: String!\n  gender: String!\n  age: Int\n  isVerified: Boolean!\n  isMatched: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  messages: [Message]\n  coupleId: Int\n  couple: Couple\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Verification {\n  id: Int!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]\n  users: [User]\n  couple: Couple\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Couple {\n  id: Int!\n  status: String!\n  users: [User]\n  placeId: Int\n  place: Place\n  chatId: Int\n  chat: Chat\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chatId: Int!\n  chat: Chat!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!\n  LogIn(email: String!, password: String!): LogInResponse!\n  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!\n  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  star: Int!\n  address: String!\n  explanation: String\n  isTaken: Boolean!\n  couples: [Couple]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  getUser: User!\n}\n\ntype LogInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype SignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  name: String!\n  password: String!\n  gender: String!\n  introduction: String\n  age: Int\n  isVerified: Boolean!\n  isMatched: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  messages: [Message]\n  coupleId: Int\n  couple: Couple\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Verification {\n  id: Int!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -18,6 +18,7 @@ export interface User {
   name: string;
   password: string;
   gender: string;
+  introduction: string | null;
   age: number | null;
   isVerified: boolean;
   isMatched: boolean;
@@ -79,9 +80,18 @@ export interface Place {
 }
 
 export interface Mutation {
+  AddPlace: AddPlaceResponse;
   LogIn: LogInResponse;
   SignUp: SignUpResponse;
   UpdateMyProfile: UpdateMyProfileResponse;
+}
+
+export interface AddPlaceMutationArgs {
+  name: string;
+  lat: number;
+  lng: number;
+  address: string;
+  explanation: string;
 }
 
 export interface LogInMutationArgs {
@@ -102,6 +112,12 @@ export interface UpdateMyProfileMutationArgs {
   password: string | null;
   gender: string | null;
   age: string | null;
+  introduction: string | null;
+}
+
+export interface AddPlaceResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface LogInResponse {

@@ -30,6 +30,18 @@ type Message {
   updatedAt: String
 }
 
+type AddPlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!
+  LogIn(email: String!, password: String!): LogInResponse!
+  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
+  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!
+}
+
 type Place {
   id: Int!
   name: String!
@@ -61,12 +73,6 @@ type LogInResponse {
   token: String
 }
 
-type Mutation {
-  LogIn(email: String!, password: String!): LogInResponse!
-  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
-  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String): UpdateMyProfileResponse!
-}
-
 type SignUpResponse {
   ok: Boolean!
   error: String
@@ -84,6 +90,7 @@ type User {
   name: String!
   password: String!
   gender: String!
+  introduction: String
   age: Int
   isVerified: Boolean!
   isMatched: Boolean!

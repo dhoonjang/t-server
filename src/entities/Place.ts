@@ -22,7 +22,7 @@ class Place extends BaseEntity {
   @Column({ type: "double precision", default: 0 })
   lng: number;
 
-  @Column({ type: "int", default: 0 })
+  @Column({ type: "int", default: 1 })
   star: number;
   
   @Column({ type: "text" })

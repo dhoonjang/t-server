@@ -64,7 +64,7 @@ type LogInResponse {
 type Mutation {
   LogIn(email: String!, password: String!): LogInResponse!
   SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
-  UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
+  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String): UpdateMyProfileResponse!
 }
 
 type SignUpResponse {

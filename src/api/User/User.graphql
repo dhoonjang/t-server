@@ -4,6 +4,7 @@ type User {
   name: String!
   password: String!
   gender: String!
+  introduction: String
   age: Int
   isVerified: Boolean!
   isMatched: Boolean!

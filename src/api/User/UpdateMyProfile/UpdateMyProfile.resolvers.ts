@@ -16,6 +16,11 @@ const resolvers: Resolvers = {
                 user.save();
                 delete notNull.password;
             }
+            if(args.age !== null){
+                user.age = parseInt(args.age, 10);
+                user.save();
+                delete notNull.age;
+            }
             const bug = await User.update({ id: user.id }, { ...notNull });
             console.log(bug);
             return {

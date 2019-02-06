@@ -34,6 +34,9 @@ class User extends BaseEntity {
   
   @Column({ type: "text" })
   gender: string;
+  
+  @Column({ type: "text", nullable: true})
+  introduction: string;
 
   @Column({ type: "int", nullable: true })
   age: number;

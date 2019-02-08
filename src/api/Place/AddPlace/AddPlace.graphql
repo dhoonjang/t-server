@@ -9,6 +9,6 @@ type Mutation {
     lat: Float!
     lng: Float!
     address: String!
-    explanation: String
+    explanation: String!
   ): AddPlaceResponse!
 }

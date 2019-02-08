@@ -19,6 +19,33 @@ type Couple {
   updatedAt: String
 }
 
+type GetCoupleResponse {
+  ok: Boolean!
+  error: String
+  couple: Couple
+}
+
+type Query {
+  GetCouple: GetCoupleResponse!
+  GetPlaces: GetPlacesResponse!
+  GetMyProfile: GetMyProfileResponse!
+  getUser: User!
+}
+
+type RequestCoupleResponse {
+  ok: Boolean!
+  error: String
+  couple: Couple
+}
+
+type Mutation {
+  RequestCouple: RequestCoupleResponse!
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!
+  LogIn(email: String!, password: String!): LogInResponse!
+  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
+  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!
+}
+
 type Message {
   id: Int!
   text: String!
@@ -35,11 +62,10 @@ type AddPlaceResponse {
   error: String
 }
 
-type Mutation {
-  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!
-  LogIn(email: String!, password: String!): LogInResponse!
-  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
-  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!
+type GetPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
 }
 
 type Place {
@@ -49,7 +75,7 @@ type Place {
   lng: Float!
   star: Int!
   address: String!
-  explanation: String
+  explanation: String!
   isTaken: Boolean!
   couples: [Couple]
   createdAt: String!
@@ -60,11 +86,6 @@ type GetMyProfileResponse {
   ok: Boolean!
   error: String
   user: User
-}
-
-type Query {
-  GetMyProfile: GetMyProfileResponse!
-  getUser: User!
 }
 
 type LogInResponse {

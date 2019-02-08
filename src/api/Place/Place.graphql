@@ -5,7 +5,7 @@ type Place {
   lng: Float!
   star: Int!
   address: String!
-  explanation: String
+  explanation: String!
   isTaken: Boolean!
   couples: [Couple]
   createdAt: String!

@@ -1,4 +1,4 @@
-type RequestCoupleResponse {
+type FindCoupleResponse {
   ok: Boolean!
   error: String
   couple: Couple
@@ -6,5 +6,5 @@ type RequestCoupleResponse {
 }
 
 type Mutation {
-  RequestCouple: RequestCoupleResponse!
+  FindCouple: FindCoupleResponse!
 }

@@ -1,33 +1,24 @@
-import { getRepository } from "typeorm";
 import User from "../../../entities/User"; 
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
-import { GetCoupleResponse } from "src/types/graph";
+import { GetMyCoupleResponse } from "src/types/graph";
 import Couple from "../../../entities/Couple";
 
 const resolvers: Resolvers = {
   Query: {
-    GetCouple: privateResolver(
-      async (_, __, { req }): Promise<GetCoupleResponse> => {
+    GetMyCouple: privateResolver(
+      async (_, __, { req, pubSub }): Promise<GetMyCoupleResponse> => {
         const user: User = req.user;
-        if (!user.isMatched) {
-          const { gender } = user;
-          let opgender = "male"
-          if(gender === "male"){
-            opgender = "female"
-          }
+        if (user.isMatched && user.coupleId) {
           try {
-            const couples = await getRepository(Couple).find({
-                where: {status: "REQUESTING"},
+            const couple = await Couple.findOne({
+                where: {id: user.coupleId},
                 relations: ["users"]
               }
             );
-            
-            const couple = couples.find(e => {
-              return e.users[0].gender === opgender
-            });
 
             if (couple) {
+              // pubSub.publish("coupleStatus", {CoupleStatusSubscription: couple});
               return {
                 ok: true,
                 error: null,
@@ -35,8 +26,8 @@ const resolvers: Resolvers = {
               };
             } else {
               return {
-                ok: true,
-                error: null,
+                ok: false,
+                error: "You have no couple",
                 couple: null
               }
             }
@@ -50,7 +41,7 @@ const resolvers: Resolvers = {
         } else {
           return {
             ok: false,
-            error: "You are not a driver",
+            error: "You have no couple",
             couple: null
           };
         }

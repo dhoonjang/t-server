@@ -7,6 +7,31 @@ type Chat {
   updatedAt: String
 }
 
+type ChangeCoupleResponse {
+  ok: Boolean!
+  error: String
+  coupleId: Int!
+  user: User
+}
+
+enum StatusOptions {
+  MATCHING
+  FINISHED
+  CANCELED
+  REQUESTING
+  MEETING
+}
+
+type Mutation {
+  ChangeCouple(coupleId: Int!, status: StatusOptions!): ChangeCoupleResponse!
+  FindCouple: FindCoupleResponse!
+  RequestCouple: RequestCoupleResponse!
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!
+  LogIn(email: String!, password: String!): LogInResponse!
+  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
+  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!
+}
+
 type Couple {
   id: Int!
   status: String!
@@ -19,14 +44,25 @@ type Couple {
   updatedAt: String
 }
 
-type GetCoupleResponse {
+type Subscription {
+  CoupleStatusSubscription: Couple
+}
+
+type FindCoupleResponse {
+  ok: Boolean!
+  error: String
+  couple: Couple
+  user: User
+}
+
+type GetMyCoupleResponse {
   ok: Boolean!
   error: String
   couple: Couple
 }
 
 type Query {
-  GetCouple: GetCoupleResponse!
+  GetMyCouple: GetMyCoupleResponse!
   GetPlaces: GetPlacesResponse!
   GetMyProfile: GetMyProfileResponse!
   getUser: User!
@@ -36,14 +72,7 @@ type RequestCoupleResponse {
   ok: Boolean!
   error: String
   couple: Couple
-}
-
-type Mutation {
-  RequestCouple: RequestCoupleResponse!
-  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, explanation: String!): AddPlaceResponse!
-  LogIn(email: String!, password: String!): LogInResponse!
-  SignUp(name: String!, email: String!, password: String!, gender: String!): SignUpResponse!
-  UpdateMyProfile(name: String, email: String, password: String, gender: String, age: String, introduction: String): UpdateMyProfileResponse!
+  user: User
 }
 
 type Message {

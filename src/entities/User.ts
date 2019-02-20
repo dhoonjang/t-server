@@ -65,15 +65,17 @@ class User extends BaseEntity {
   @Column({ nullable: true })
   coupleId: number;
 
-  @ManyToOne(type => Couple, couple => couple.users)
+  @ManyToOne(type => Couple, couple => couple.users, {nullable: true})
   couple: Couple;
 
   @CreateDateColumn() createdAt: string;
 
   @UpdateDateColumn() updatedAt: string;
 
-  public comparePassword(password: string): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
+  public async comparePassword(password: string): Promise<boolean> {
+    const compareResult = await bcrypt.compare(password, this.password)
+    console.log(compareResult);
+    return compareResult;
   }
 
   @BeforeInsert()

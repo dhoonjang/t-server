@@ -1,9 +1,9 @@
-type GetCoupleResponse {
+type GetMyCoupleResponse {
   ok: Boolean!
   error: String
   couple: Couple
 }
 
 type Query {
-  GetCouple: GetCoupleResponse!
+  GetMyCouple: GetMyCoupleResponse!
 }

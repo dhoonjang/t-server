@@ -18,27 +18,30 @@ const resolvers: Resolvers = {
         if (!user.isMatched) {
             try {
                 const couple = await Couple.create({ users: [user] }).save();
-                /* pubSub.publish("coupleRequest", {NearbyRideSubscription: ride}); */
                 user.isMatched = true;
                 user.couple = couple;
+                user.coupleId = couple.id;
                 user.save();
                 return {
                     ok: true,
                     error: null,
-                    couple
+                    couple,
+                    user
                 };
             } catch (error) {
                 return {
                     ok: false,
                     error: error.message,
-                    couple: null
+                    couple: null,
+                    user
                 };
             }
         } else {
             return {
                 ok: false,
                 error: "You can't request two couples",
-                couple: null
+                couple: null,
+                user
             };
         }
       }

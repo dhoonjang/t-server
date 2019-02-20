@@ -1,0 +1,21 @@
+type ChangeCoupleResponse {
+  ok: Boolean!
+  error: String
+  coupleId: Int!
+  user: User
+}
+
+enum StatusOptions {
+  MATCHING
+  FINISHED
+  CANCELED
+  REQUESTING
+  MEETING
+}
+
+type Mutation {
+  ChangeCouple(
+    coupleId: Int!
+    status: StatusOptions!
+  ): ChangeCoupleResponse!
+}
